@@ -1,5 +1,6 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:retrivo/LoginPage.dart';
+import 'package:retrivo/MyReportsPage.dart';
 
 class Profile_Page extends StatefulWidget {
   const Profile_Page({super.key});
@@ -8,6 +9,92 @@ class Profile_Page extends StatefulWidget {
 }
 
 class _Profile_PageState extends State {
+  // Method to show confirmation dialog
+  void _showLogoutConfirmation() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0), // Rounded corners
+          ),
+          title: const Row(
+            children: [
+              Icon(Icons.logout, color: Colors.redAccent), // Icon for Logout
+              SizedBox(width: 8),
+              Text(
+                'Logout',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.redAccent,
+                ),
+              ),
+            ],
+          ),
+          content: Text(
+            'Are you sure you want to logout?',
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.grey[700],
+            ),
+          ),
+          actions: <Widget>[
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.grey[700],
+                backgroundColor: Colors.grey[200],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              ),
+              child: const Text(
+                'Cancel',
+                style: TextStyle(fontSize: 18),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.redAccent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              ),
+              child: const Text(
+                'Logout',
+                style: TextStyle(fontSize: 18),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+                _logout(); // Call the logout method
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  // Method to handle logout
+  void _logout() {
+    print("User  logged out.");
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return const Demopage();
+      }),
+      (route) {
+        return false;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,7 +179,8 @@ class _Profile_PageState extends State {
             } else if (value == 1) {
               print("Settings menu is selected.");
             } else if (value == 2) {
-              print("Logout menu is selected.");
+              _showLogoutConfirmation();
+              setState(() {});
             }
           }),
         ],
@@ -306,68 +394,82 @@ class _Profile_PageState extends State {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Container(
-                    width: 146,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [Colors.blueGrey, Colors.black87],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const Myreportspage();
+                      }));
+                    },
+                    child: Container(
+                      width: 146,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 6),
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [Colors.blueGrey, Colors.black87],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        borderRadius: BorderRadius.circular(7),
                       ),
-                      borderRadius: BorderRadius.circular(7),
-                    ),
-                    child: const Row(
-                      children: [
-                        Icon(
-                          Icons.my_library_books_outlined,
-                          color: Colors.white,
-                          size: 22,
-                        ),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        Text(
-                          'My Reports', // Button for reports
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w700),
-                        ),
-                      ],
+                      child: const Row(
+                        children: [
+                          Icon(
+                            Icons.my_library_books_outlined,
+                            color: Colors.white,
+                            size: 22,
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Text(
+                            'My Reports', // Button for reports
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  Container(
-                    width: 146,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 28, vertical: 6),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Colors.red.shade300, Colors.red.shade800],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
+                  GestureDetector(
+                    onTap: () {
+                      _showLogoutConfirmation();
+                      setState(() {});
+                    },
+                    child: Container(
+                      width: 146,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 28, vertical: 6),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [Colors.red.shade300, Colors.red.shade800],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        borderRadius: BorderRadius.circular(7),
                       ),
-                      borderRadius: BorderRadius.circular(7),
-                    ),
-                    child: const Row(
-                      children: [
-                        Icon(
-                          Icons.logout_outlined,
-                          color: Colors.white,
-                          size: 22,
-                        ),
-                        SizedBox(
-                          width: 6,
-                        ),
-                        Text(
-                          'Logout', // Button for logout
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w700),
-                        ),
-                      ],
+                      child: const Row(
+                        children: [
+                          Icon(
+                            Icons.logout_outlined,
+                            color: Colors.white,
+                            size: 22,
+                          ),
+                          SizedBox(
+                            width: 6,
+                          ),
+                          Text(
+                            'Logout', // Button for logout
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
