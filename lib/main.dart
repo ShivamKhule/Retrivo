@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:retrivo/ChatList.dart';
+import 'package:retrivo/Notifications.dart';
+import 'ChatList.dart';
 import 'Profile_Page.dart';
 
 void main() {
@@ -10,9 +13,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Profile_Page(),
+      // home: Profile_Page(),
+      // home: NotificationsScreen(),
+      home: ChatListScreen(),
     );
   }
 }

@@ -47,7 +47,8 @@ class _Profile_PageState extends State {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               ),
               child: const Text(
                 'Cancel',
@@ -64,7 +65,8 @@ class _Profile_PageState extends State {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               ),
               child: const Text(
                 'Logout',
@@ -83,7 +85,7 @@ class _Profile_PageState extends State {
 
   // Method to handle logout
   void _logout() {
-    print("User  logged out.");
+    print("User logged out.");
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) {
@@ -124,12 +126,12 @@ class _Profile_PageState extends State {
                       size: 30,
                       color: Colors.green,
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 5,
                     ),
                     Text(
                       "Edit Profile", // Menu item to edit profile
-                      style: const TextStyle(fontSize: 17),
+                      style: TextStyle(fontSize: 17),
                     ),
                   ],
                 ),
@@ -143,12 +145,12 @@ class _Profile_PageState extends State {
                       size: 30,
                       color: Colors.blue,
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 5,
                     ),
                     Text(
                       "Settings", // Menu item for settings
-                      style: const TextStyle(fontSize: 17),
+                      style: TextStyle(fontSize: 17),
                     ),
                   ],
                 ),
@@ -162,12 +164,12 @@ class _Profile_PageState extends State {
                       size: 30,
                       color: Colors.red,
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 5,
                     ),
                     Text(
                       "Logout", // Menu item for logout
-                      style: const TextStyle(fontSize: 17, color: Colors.red),
+                      style: TextStyle(fontSize: 17, color: Colors.red),
                     ),
                   ],
                 ),
@@ -175,7 +177,7 @@ class _Profile_PageState extends State {
             ];
           }, onSelected: (value) {
             if (value == 0) {
-              print("My account menu is selected.");
+              print("Edit Profile is selected.");
             } else if (value == 1) {
               print("Settings menu is selected.");
             } else if (value == 2) {
@@ -191,98 +193,104 @@ class _Profile_PageState extends State {
             opacity: 0.30,
             child: Container(
               decoration: const BoxDecoration(
+                border: Border(
+                    bottom: BorderSide(
+                  color: Colors.black54,
+                  width: 5,
+                )),
                 color: Colors.grey,
               ),
               width: MediaQuery.of(context).size.width,
-              height: 340,
+              height: 320,
               child: Image.asset(
                 "assets/images/humanImage.png", // Background image with opacity
                 fit: BoxFit.fill,
               ),
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(
-                height: 269,
-              ),
-              Container(
-                width: 370,
-                height: 100,
-                margin: const EdgeInsets.all(22),
-                padding: const EdgeInsets.only(
-                    top: 8, bottom: 8, left: 10, right: 8),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.7),
-                      spreadRadius: 3,
-                      blurRadius: 6,
-                      offset: const Offset(4, 4), // Shadow effect for container
+          SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 247,
+                ),
+                Container(
+                  width: 370,
+                  height: 100,
+                  margin: const EdgeInsets.all(22),
+                  padding: const EdgeInsets.only(
+                      top: 8, bottom: 8, left: 10, right: 8),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.7),
+                        spreadRadius: 3,
+                        blurRadius: 6,
+                        offset:
+                            const Offset(4, 4), // Shadow effect for container
+                      ),
+                    ],
+                    border: Border.all(
+                      color: Colors.grey.shade300,
+                      width: 1,
                     ),
-                  ],
-                  border: Border.all(
-                    color: Colors.grey.shade300,
-                    width: 1,
+                    gradient: LinearGradient(
+                      colors: [Colors.white, Colors.grey.shade100],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
                   ),
-                  gradient: LinearGradient(
-                    colors: [Colors.white, Colors.grey.shade100],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
+                  child: Row(
+                    children: [
+                      ClipOval(
+                        child: Image.asset(
+                          "assets/images/humanImage.png", // Profile image
+                          width: 90,
+                          height: 90,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Hello...!", // Welcome message
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Text(
+                            "shivam2707", // Username
+                            style: TextStyle(
+                              fontSize: 23,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                      GestureDetector(
+                        onTap: () {}, // Action for edit button
+                        child: const Icon(
+                          Icons.edit_note_outlined,
+                          size: 30,
+                          color: Colors.green,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                child: Row(
-                  children: [
-                    ClipOval(
-                      child: Image.asset(
-                        "assets/images/humanImage.png", // Profile image
-                        width: 90,
-                        height: 90,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Hello...!", // Welcome message
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Text(
-                          "shivam2707", // Username
-                          style: TextStyle(
-                            fontSize: 23,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Spacer(),
-                    GestureDetector(
-                      onTap: () {}, // Action for edit button
-                      child: const Icon(
-                        Icons.edit_note_outlined,
-                        size: 30,
-                        color: Colors.green,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                width: 370,
-                padding:
-                    const EdgeInsets.only(top: 0, bottom: 8, left: 4, right: 4),
-                decoration: const BoxDecoration(),
-                child: Expanded(
+                Container(
+                  width: 370,
+                  padding: const EdgeInsets.only(
+                      top: 0, bottom: 8, left: 4, right: 4),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -293,12 +301,12 @@ class _Profile_PageState extends State {
                         height: 12,
                       ),
                       const Text(
-                        'Name :-', // Display name label
+                        'Name :-',
                         style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500),
+                            fontSize: 16, fontWeight: FontWeight.w500, color: Colors.purple),
                       ),
                       const Text(
-                        'Shivam Khule', // Display name
+                        'Shivam Khule',
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.w700),
                       ),
@@ -308,12 +316,12 @@ class _Profile_PageState extends State {
                         height: 12,
                       ),
                       const Text(
-                        'Email ID :-', // Display email label
+                        'Email ID :-',
                         style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500),
+                            fontSize: 16, fontWeight: FontWeight.w500, color: Colors.purple),
                       ),
                       const Text(
-                        'shivamkhule@gmail.com', // Display email
+                        'shivamkhule@gmail.com',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w700),
                       ),
@@ -323,14 +331,50 @@ class _Profile_PageState extends State {
                         height: 12,
                       ),
                       const Text(
-                        'Bio :-', // Bio label
+                        'Bio :-',
                         style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500),
+                            fontSize: 16, fontWeight: FontWeight.w500, color: Colors.purple),
                       ),
-                      const Text(
-                        '***User Bio***', // Placeholder for user bio
-                        style: TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.w700),
+                      GestureDetector(
+                        onTap: () {
+                          // Show dialog with full bio text on tap
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text(
+                                  'User Bio',
+                                  style: TextStyle(fontWeight: FontWeight.bold,),
+                                ),
+                                content: const SingleChildScrollView(
+                                  child: Text(
+                                    "***Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.***",
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context)
+                                          .pop(); // Close the dialog
+                                    },
+                                    child: const Text('Close'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        child: const Text(
+                          "***Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.***",
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          maxLines: 4, // Limit the text to 4 lines
+                          overflow: TextOverflow
+                              .ellipsis, // Show "..." if text exceeds maxLines
+                        ),
                       ),
                       const Divider(
                         color: Colors.grey,
@@ -338,14 +382,14 @@ class _Profile_PageState extends State {
                         height: 12,
                       ),
                       const Text(
-                        'Location :-', // Location label
+                        'Location :-',
                         style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500),
+                            fontSize: 16, fontWeight: FontWeight.w500, color: Colors.purple),
                       ),
                       Row(
                         children: [
                           const Text(
-                            'Maharashra, Pune', // Display location
+                            'Maharashtra, Pune',
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.w500),
                           ),
@@ -354,7 +398,7 @@ class _Profile_PageState extends State {
                             child: const Row(
                               children: [
                                 Text(
-                                  'Visit', // Visit location option
+                                  'Visit',
                                   style: TextStyle(
                                       color: Colors.blue, fontSize: 16),
                                 ),
@@ -373,12 +417,12 @@ class _Profile_PageState extends State {
                         height: 12,
                       ),
                       const Text(
-                        'Contact :-', // Contact label
+                        'Contact :-',
                         style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500),
+                            fontSize: 16, fontWeight: FontWeight.w500, color: Colors.purple),
                       ),
                       const Text(
-                        '+91 801055144', // Display contact number
+                        '+91 801055144',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w700),
                       ),
@@ -390,91 +434,92 @@ class _Profile_PageState extends State {
                     ],
                   ),
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return const Myreportspage();
-                      }));
-                    },
-                    child: Container(
-                      width: 146,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 6),
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          colors: [Colors.blueGrey, Colors.black87],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return const Myreportspage();
+                        }));
+                      },
+                      child: Container(
+                        width: 146,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 6),
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [Colors.blueGrey, Colors.black87],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(7),
                         ),
-                        borderRadius: BorderRadius.circular(7),
-                      ),
-                      child: const Row(
-                        children: [
-                          Icon(
-                            Icons.my_library_books_outlined,
-                            color: Colors.white,
-                            size: 22,
-                          ),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          Text(
-                            'My Reports', // Button for reports
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ],
+                        child: const Row(
+                          children: [
+                            Icon(
+                              Icons.my_library_books_outlined,
+                              color: Colors.white,
+                              size: 22,
+                            ),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            Text(
+                              'My Reports', // Button for reports
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      _showLogoutConfirmation();
-                      setState(() {});
-                    },
-                    child: Container(
-                      width: 146,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 28, vertical: 6),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [Colors.red.shade300, Colors.red.shade800],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
+                    GestureDetector(
+                      onTap: () {
+                        _showLogoutConfirmation();
+                        setState(() {});
+                      },
+                      child: Container(
+                        width: 146,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 28, vertical: 6),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [Colors.red.shade300, Colors.red.shade800],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(7),
                         ),
-                        borderRadius: BorderRadius.circular(7),
-                      ),
-                      child: const Row(
-                        children: [
-                          Icon(
-                            Icons.logout_outlined,
-                            color: Colors.white,
-                            size: 22,
-                          ),
-                          SizedBox(
-                            width: 6,
-                          ),
-                          Text(
-                            'Logout', // Button for logout
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ],
+                        child: const Row(
+                          children: [
+                            Icon(
+                              Icons.logout_outlined,
+                              color: Colors.white,
+                              size: 22,
+                            ),
+                            SizedBox(
+                              width: 6,
+                            ),
+                            Text(
+                              'Logout', // Button for logout
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+                const SizedBox(height: 24,),
+              ],
+            ),
           ),
         ],
       ),
