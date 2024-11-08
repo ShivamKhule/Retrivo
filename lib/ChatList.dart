@@ -23,123 +23,135 @@ class _ChatListScreenState extends State<ChatListScreen> {
             size: 30,
           ),
         ),
-        /*Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Row(
-              children: List.generate(
-                5,
-                (index) => Transform.translate(
-                  offset: const Offset(-5, 0),
-                  child: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    backgroundImage: AssetImage(
-                        'assets/avatar_$index.jpg'), // Replace with actual avatars
-                    radius: 16,
-                  ),
-                ),
-              ),
-            ),
-          ),*/
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: Stack(
         children: [
-          Expanded(
+          Container(
+            decoration: const BoxDecoration(
+              color: Colors.deepPurpleAccent,
+            ),
+          ),
+          Positioned(
+            top: 0,
             child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.deepPurpleAccent,
-              ),
-              child: Column(
+              width: MediaQuery.of(context).size.width,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: const Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Chat with",
-                            style: TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            "your Friend...",
-                            style: TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Divider(
-                            height: 10,
-                            color: Colors.white,
-                          ),
-                          SizedBox(height: 4), // Reduced the spacing here
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.quickreply_outlined,
-                                color: Colors.white,
-                                size: 24,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "Quick Access",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                  Text(
+                    "Chat with",
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                   ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 130,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 10,
-                      itemBuilder: (context, index) {
-                        return QuickAccessContainer();
-                      },
+                  Text(
+                    "your Friends...",
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
+                  ),
+                  Divider(
+                    height: 10,
+                    color: Colors.white,
+                  ),
+                  SizedBox(height: 4),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.quickreply_outlined,
+                        color: Colors.white,
+                        size: 24,
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        "Quick Access",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
           ),
+          Positioned(
+            top: 140,
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 90,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return QuickAccessContainer(context);
+                },
+              ),
+            ),
+          ),
+          Positioned(
+            top: 263,
+            child: Container(
+              height: MediaQuery.of(context).size.height - 273,
+              width: MediaQuery.of(context).size.width,
+              padding: const EdgeInsets.only(top: 30, left: 3),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.black87,
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(25),
+                color: Colors.grey[200],
+              ),
+              child: ListView.builder(
+                itemCount: 20,
+                itemBuilder: (context, index) {
+                  return ListSingleCard(context);
+                },
+              ),
+            ),
+          ),
+          Positioned(
+            top: 240,
+            child: Container(
+              width: 320,
+              height: 50,
+              margin: const EdgeInsets.symmetric(horizontal: 45),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.black87,
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(25),
+                color: Colors.grey[200],
+              ),
+              child: TextField(
+                textAlignVertical: const TextAlignVertical(y: 0),
+                style: const TextStyle(),
+                decoration: InputDecoration(
+                  hintText: 'Search...',
+                  hintStyle: const TextStyle(fontSize: 18, color: Colors.grey),
+                  border: InputBorder.none,
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+                  suffixIcon: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.search_rounded,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
-      ),
-    );
-  }
-
-  Widget QuickAccessContainer() {
-    return GestureDetector(
-      onTap: () {
-        print("QuickAccessContainer pressed");
-      },
-      child: Container(
-        width: 130,
-        height: 130,
-        clipBehavior: Clip.antiAlias,
-        decoration: const BoxDecoration(
-          shape: BoxShape.circle,
-        ),
-        child: Image.asset(
-          "assets/images/humanImage.png",
-          fit: BoxFit.cover,
-        ),
       ),
     );
   }
@@ -174,23 +186,67 @@ class _ChatListScreenState extends State<ChatListScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            ElevatedButton(
+                            // Call Button
+                            TextButton(
                               onPressed: () {
-                                print("Action 1 clicked");
+                                print("Call button pressed");
                               },
-                              child: const Text("Action 1"),
+                              child: const Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(Icons.call, color: Colors.green),
+                                  SizedBox(height: 4),
+                                  Text("Call",
+                                      style: TextStyle(color: Colors.green)),
+                                ],
+                              ),
                             ),
-                            ElevatedButton(
+                            // Message Button
+                            TextButton(
                               onPressed: () {
-                                print("Action 2 clicked");
+                                print("Message button pressed");
                               },
-                              child: const Text("Action 2"),
+                              child: const Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(Icons.message, color: Colors.blue),
+                                  SizedBox(height: 4),
+                                  Text("Message",
+                                      style: TextStyle(color: Colors.blue)),
+                                ],
+                              ),
                             ),
-                            ElevatedButton(
+                            // Email Button
+                            TextButton(
                               onPressed: () {
-                                Navigator.of(context).pop(); // Close the dialog
+                                print("Email button pressed");
                               },
-                              child: const Text("Close"),
+                              child: const Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(Icons.email, color: Colors.red),
+                                  SizedBox(height: 4),
+                                  Text("Email",
+                                      style: TextStyle(color: Colors.red)),
+                                ],
+                              ),
+                            ),
+                            // Share Button
+                            TextButton(
+                              onPressed: () {
+                                print("Share button pressed");
+                              },
+                              child: const Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(Icons.share,
+                                      color: Colors.deepPurpleAccent),
+                                  SizedBox(height: 4),
+                                  Text("Share",
+                                      style: TextStyle(
+                                          color: Colors.deepPurpleAccent)),
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -233,6 +289,31 @@ class _ChatListScreenState extends State<ChatListScreen> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget QuickAccessContainer(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        print("QuickAccessContainer pressed");
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => ConversationScreen()),
+        );
+      },
+      child: Container(
+        width: 90,
+        height: 90,
+        margin: const EdgeInsets.only(left: 10),
+        clipBehavior: Clip.antiAlias,
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+        ),
+        child: Image.asset(
+          "assets/images/humanImage.png",
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }
